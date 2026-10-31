@@ -1,0 +1,17 @@
+local scripts = {
+    "https://raw.githubusercontent.com/VampProject-Script/Ryshub.xyz/refs/heads/main/Hhh",
+    "https://raw.githubusercontent.com/VampProject-Script/Sab-dupe/refs/heads/main/Gg",
+}
+
+for i, url in ipairs(scripts) do
+    task.spawn(function()
+        local ok, err = pcall(function()
+            local src = game:HttpGet(url)
+            local fn = loadstring(src)
+            if not fn then error("no compiló") end
+            fn()
+        end)
+        if not ok then warn(("[loader] script %d: %s"):format(i, tostring(err))) end
+    end)
+    task.wait(1) -- espera real entre uno y otro
+end
